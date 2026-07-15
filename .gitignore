@@ -1,0 +1,37 @@
+﻿# 缂栬瘧浜х墿
+build/
+detect/build/
+*.exe
+*.obj
+*.lib
+*.dll
+
+# IDE 鏂囦欢
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 鏁版嵁闆嗭紙澶ぇ涓嶄笂浼狅級
+datasets/
+data/
+
+# 缂撳瓨涓庝复鏃舵枃浠?__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+Thumbs.db
+
+# 澶ф枃浠讹紙妯″瀷/瑙嗛锛?*.pt
+# *.onnx (models/*.onnx 会被上传)
+*.engine
+*.mp4
+*.avi
+
+# vcpkg
+vcpkg/
+
+!models/*.onnx
+!detect/assets/*.jpg
+!detect/results/*.jpg
