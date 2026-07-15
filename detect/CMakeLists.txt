@@ -1,25 +1,39 @@
-cmake_minimum_required(VERSION 3.10)
-project(RoboMasterDetect LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.15)
+project(armor_detect VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# OpenCV 路径
-set(OpenCV_DIR "C:/msys64/mingw64/lib/cmake/opencv4" CACHE PATH "Path to OpenCV CMake config")
+# ============================================================
+# OpenCV 依赖
+# ============================================================
+find_package(OpenCV 4.5 REQUIRED)
 
-find_package(OpenCV REQUIRED COMPONENTS core dnn imgproc imgcodecs videoio)
-include_directories(${OpenCV_INCLUDE_DIRS})
-
-add_executable(detect
-    src/main.cpp
-    src/detector.cpp
+include_directories(
+    ${CMAKE_SOURCE_DIR}/include
+    ${OpenCV_INCLUDE_DIRS}
 )
 
-target_include_directories(detect PRIVATE include)
+# ============================================================
+# 源文件
+# ============================================================
+set(SOURCES
+    src/main.cpp
+    src/detector.cpp
+    src/target_selector.cpp
+    src/visualizer.cpp
+)
 
-target_link_libraries(detect ${OpenCV_LIBS})
+# ============================================================
+# 构建目标
+# ============================================================
+add_executable(${PROJECT_NAME} ${SOURCES})
 
-# 复制模型和测试资源
-file(COPY ${CMAKE_SOURCE_DIR}/../models DESTINATION ${CMAKE_BINARY_DIR})
-file(COPY ${CMAKE_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR})
+target_link_libraries(${PROJECT_NAME}
+    ${OpenCV_LIBS}
+)
+
+target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -O2)
+
+message(STATUS "OpenCV version: ${OpenCV_VERSION}")
