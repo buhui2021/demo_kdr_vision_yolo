@@ -6,7 +6,7 @@
 #include <array>
 
 /// 最大输出 4 个装甲板中心点
-static constexpr int MAX_ARMOR_COUNT = 4;
+static constexpr int MAX_ARMOR_COUNT = 8;
 
 /// 一帧的锁定结果: 最多 4 个中心点，不足的填 (0,0)
 struct FrameResult {

@@ -15,5 +15,5 @@ class Visualizer {
 public:
     void drawDetections(cv::Mat& frame, const std::vector<ArmorObject>& detections);
     void drawCenters(cv::Mat& frame, const FrameResult& result);
-    void drawHUD(cv::Mat& frame, float fps, int detected_count);
+    void drawHUD(cv::Mat& frame, float fps, int detected_count, float infer_ms = 0);
 };

@@ -72,7 +72,7 @@ static void processImage(const cv::Mat& image, ArmorDetector& detector,
     cv::Mat display = image.clone();
     vis.drawDetections(display, detections);
     vis.drawCenters(display, result);
-    vis.drawHUD(display, 0, result.detected_count);
+    vis.drawHUD(display, 0, result.detected_count, detector.getLastInferenceMs());
 
     // 保存
     fs::create_directories(args.result_dir);
@@ -139,7 +139,7 @@ static void processVideo(ArmorDetector& detector, TargetSelector& selector,
         vis.drawCenters(frame, result);
         float fps = (total_time_ms > 0 && total_frames > 0)
                         ? (1000.0f * total_frames / total_time_ms) : 0;
-        vis.drawHUD(frame, fps, result.detected_count);
+        vis.drawHUD(frame, fps, result.detected_count, detector.getLastInferenceMs());
 
         // 保存帧截图
         if (total_frames % 30 == 1) {
